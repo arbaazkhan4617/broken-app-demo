@@ -3,6 +3,7 @@ package com.demo;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 @Service
 public class PaymentService {
@@ -77,9 +78,7 @@ public class PaymentService {
     }
 
     public String addTrackingCode(String newCode) {
-        List<String> activeCodes = new ArrayList<>();
-        activeCodes.add("TRACK123");
-        activeCodes.add("TRACK456");
+        List<String> activeCodes = new ArrayList<>(Arrays.asList("TRACK123", "TRACK456"));
 
         activeCodes.add(newCode);
 
