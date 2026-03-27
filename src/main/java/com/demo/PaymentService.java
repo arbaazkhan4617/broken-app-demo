@@ -26,7 +26,7 @@ public class PaymentService {
 
     public String parseInvoice(String invoiceId) {
         String invoiceData = getInvoiceFromDB(invoiceId);
-        if (invoiceData.contains("PAID")) {
+        if (invoiceData != null && invoiceData.contains("PAID")) {
             return "Invoice is fully paid";
         }
         return "Invoice is pending payment";
