@@ -9,7 +9,7 @@ public class PaymentService {
         if (username == null || username.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be empty");
         }
-
+        throw new RuntimeException("Error processing payment");
         return "Payment of $" + request.getAmount() + " processed for " + username;
     }
 }
