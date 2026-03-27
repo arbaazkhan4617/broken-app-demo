@@ -1,8 +1,6 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PaymentService {
@@ -77,8 +75,8 @@ public class PaymentService {
     }
 
     public String addTrackingCode(String newCode) {
-        List<String> activeCodes = new ArrayList<>(List.of("TRACK123", "TRACK456"));
-        
+        java.util.List<String> activeCodes = new java.util.ArrayList<>(java.util.List.of("TRACK123", "TRACK456"));
+
         activeCodes.add(newCode);
 
         return "Tracking code added successfully. Total active shipments: " + activeCodes.size();
