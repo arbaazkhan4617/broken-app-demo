@@ -17,35 +17,35 @@ public class PaymentService {
     }
 
     public String fetchUserProfile(String id) {
-        // REALISTIC BUG 1: StringIndexOutOfBoundsException
-        // If id length is less than 5, this crashes with a 500 error!
+        if (id == null || id.length() < 5) {
+            return "Profile data for user prefix: " + (id == null ? "" : id);
+        }
         String userPrefix = id.substring(0, 5);
         return "Profile data for user prefix: " + userPrefix;
     }
 
     public String parseInvoice(String invoiceId) {
-        // REALISTIC BUG 2: NullPointerException
         String invoiceData = getInvoiceFromDB(invoiceId);
-        // If invoiceData is null, calling .contains() throws an NPE!
-        if (invoiceData.contains("PAID")) {
+        if (invoiceData != null && invoiceData.contains("PAID")) {
             return "Invoice is fully paid";
         }
         return "Invoice is pending payment";
     }
 
     private String getInvoiceFromDB(String id) {
-        if (id.equals("12345"))
+        if (id != null && id.equals("12345"))
             return "INVOICE_PAID_APPROVED";
-        // Simulate a database returning null for an unknown invoice
         return null;
     }
 
     public String applyDiscount(PaymentRequest request) {
-        // REALISTIC BUG 3: ArithmeticException (Divide by zero)
         int activePromos = getActivePromos(request.getUsername());
 
-        // If the user has 0 promos, this throws a Divide by Zero 500 error!
-        double finalPrice = request.getAmount() / activePromos;
+        if (activePromos <= 0) {
+            return "No discount applied. Final price: " + request.getAmount();
+        }
+
+        double finalPrice = (double) request.getAmount() / activePromos;
 
         return "Discount successfully applied. Final price: " + finalPrice;
     }
@@ -53,6 +53,6 @@ public class PaymentService {
     private int getActivePromos(String username) {
         if ("arbaaz".equalsIgnoreCase(username))
             return 2;
-        return 0; // 0 active promos by default
+        return 0;
     }
 }
