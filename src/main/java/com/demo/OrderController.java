@@ -24,4 +24,19 @@ public class OrderController {
     public String handleIllegalArgumentException(IllegalArgumentException ex) {
         return ex.getMessage();
     }
+
+    @GetMapping("/user/{id}")
+    public String getUserProfile(@PathVariable String id) {
+        return paymentService.fetchUserProfile(id);
+    }
+
+    @GetMapping("/invoice/{invoiceId}")
+    public String fetchInvoice(@PathVariable String invoiceId) {
+        return paymentService.parseInvoice(invoiceId);
+    }
+
+    @PostMapping("/discount")
+    public String applyDiscount(@RequestBody PaymentRequest request) {
+        return paymentService.applyDiscount(request);
+    }
 }
