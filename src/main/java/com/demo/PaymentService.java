@@ -57,17 +57,20 @@ public class PaymentService {
     }
 
     public String calculateShipping(String regionCode) {
-        // REALISTIC BUG 4: IndexOutOfBoundsException (List access violation)
         java.util.List<String> validRegions = new java.util.ArrayList<>();
         validRegions.add("NORTH");
         validRegions.add("SOUTH");
 
-        int regionIndex = Integer.parseInt(regionCode);
+        try {
+            int regionIndex = Integer.parseInt(regionCode);
+            if (regionIndex >= 0 && regionIndex < validRegions.size()) {
+                String targetRegion = validRegions.get(regionIndex);
+                return "Shipping calculated successfully for region: " + targetRegion;
+            }
+        } catch (NumberFormatException e) {
+            // Fall through to error
+        }
 
-        // If a user requests regionCode="2", this blindly accesses index 2, throwing an
-        // IndexOutOfBoundsException!
-        String targetRegion = validRegions.get(regionIndex);
-
-        return "Shipping calculated successfully for region: " + targetRegion;
+        return "Error: Invalid region code provided.";
     }
 }
