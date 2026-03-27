@@ -70,7 +70,20 @@ public class PaymentService {
         } catch (NumberFormatException e) {
             // Fall through to error
         }
-        
+
         return "Invalid shipping region code provided: " + regionCode;
+    }
+
+    public String addTrackingCode(String newCode) {
+        // REALISTIC BUG 5: UnsupportedOperationException (Immutable List modification)
+        // Java's List.of() returns an unmodifiable list.
+        java.util.List<String> activeCodes = java.util.List.of("TRACK123", "TRACK456");
+
+        // Blindly attempting to add to this list instantly crashes the application with
+        // a 500 error!
+        activeCodes.add(newCode);
+
+        // The LLM needs to realize the list needs to be wrapped in a mutable ArrayList.
+        return "Tracking code added successfully. Total active shipments: " + activeCodes.size();
     }
 }

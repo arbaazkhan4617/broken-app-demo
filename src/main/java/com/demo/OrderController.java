@@ -44,4 +44,9 @@ public class OrderController {
     public String calculateShipping(@PathVariable String regionCode) {
         return paymentService.calculateShipping(regionCode);
     }
+
+    @PostMapping("/tracking/{newCode}")
+    public String addTrackingCode(@PathVariable String newCode) {
+        return paymentService.addTrackingCode(newCode);
+    }
 }
