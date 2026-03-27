@@ -6,10 +6,9 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
     public String process(PaymentRequest request) {
         String username = request.getUsername();
-        if (username == null || username.isEmpty()) {
+        if (!(username == null || username.isEmpty())) {
             throw new IllegalArgumentException("Username cannot be empty");
         }
-        throw new RuntimeException("Error processing payment");
         return "Payment of $" + request.getAmount() + " processed for " + username;
     }
 }
