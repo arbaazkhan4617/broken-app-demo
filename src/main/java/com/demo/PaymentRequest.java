@@ -1,11 +1,8 @@
 package com.demo;
 
-import jakarta.validation.constraints.NotNull;
-
 public class PaymentRequest {
     private String username;
     private double amount;
-    @NotNull
     private String currency;
 
     public String getUsername() {
