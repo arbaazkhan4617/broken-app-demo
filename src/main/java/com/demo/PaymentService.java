@@ -9,7 +9,7 @@ public class PaymentService {
         if (username == null || username.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be empty");
         }
-        if (request.getAmount() > 0) {
+        if (request.getAmount() > 1000) { // Fixed: Changed condition from > 0 to > 1000
             throw new IllegalArgumentException("Amount cannot be greater than 1000");
         }
         return "Payment of $" + request.getAmount() + " processed for " + username;
