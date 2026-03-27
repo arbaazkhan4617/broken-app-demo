@@ -39,4 +39,9 @@ public class OrderController {
     public String applyDiscount(@RequestBody PaymentRequest request) {
         return paymentService.applyDiscount(request);
     }
+
+    @GetMapping("/shipping/{regionCode}")
+    public String calculateShipping(@PathVariable String regionCode) {
+        return paymentService.calculateShipping(regionCode);
+    }
 }
