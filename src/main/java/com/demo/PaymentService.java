@@ -71,6 +71,6 @@ public class PaymentService {
             // Fall through to error
         }
         
-        return "Invalid region code provided";
+        return "Invalid shipping region code provided: " + regionCode;
     }
 }
