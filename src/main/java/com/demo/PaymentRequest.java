@@ -3,6 +3,7 @@ package com.demo;
 public class PaymentRequest {
     private String username;
     private double amount;
+    private String currency;
 
     public String getUsername() {
         return username;
