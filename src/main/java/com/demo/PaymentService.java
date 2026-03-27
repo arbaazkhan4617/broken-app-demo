@@ -12,7 +12,7 @@ public class PaymentService {
         if (request.getAmount() < 0) {
             throw new IllegalArgumentException("Amount cannot be negative");
         }
-        if (request.getCurrency() != null) {
+        if (request.getCurrency() == null) {
             throw new IllegalArgumentException("Currency cannot be null");
         }
 
