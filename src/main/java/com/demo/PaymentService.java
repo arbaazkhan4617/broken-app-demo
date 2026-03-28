@@ -77,7 +77,9 @@ public class PaymentService {
     }
 
     public String addTrackingCode(String newCode) {
-        java.util.List<String> activeCodes = new ArrayList<>(List.of("TRACK123", "TRACK456"));
+        List<String> activeCodes = new ArrayList<>();
+        activeCodes.add("TRACK123");
+        activeCodes.add("TRACK456");
 
         activeCodes.add(newCode);
 
